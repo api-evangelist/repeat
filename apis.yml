@@ -11,7 +11,12 @@ description: >-
   profiles for segmentation and personalization. Founded in 2018 in Venice,
   California by Kim Stiefel and Sarah Wissel and backed by Battery Ventures and
   Techstars, Repeat is documented through a customer-facing Help Center rather
-  than a public developer API or portal.
+  than a public developer API or portal. It publishes no OpenAPI, GraphQL schema
+  or developer console, but it does document a real integration surface in
+  detail: five named lifecycle "Moment" events with typed payloads, a set of
+  customer profile properties written into Klaviyo, and a parameterized hosted
+  Personalized Cart URL that carries the reorder experience into email, SMS and
+  printed QR codes.
 url: https://raw.githubusercontent.com/api-evangelist/repeat/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -21,19 +26,27 @@ x-backed-by:
 x-tier: stub
 x-tier-reason: portfolio-lead
 accessModel:
-  pricing: unknown
-  onboarding: unknown
+  pricing: paid
+  onboarding: sales
   trial: false
   try_now: false
   public: false
-  label: Unknown
-  confidence: low
-  source: []
-  generated: '2026-07-22'
-  method: derived
+  label: Paid
+  confidence: high
+  source:
+  - https://getrepeat.io/product/pricing
+  - https://apps.shopify.com/repeat
+  generated: '2026-08-13'
+  method: searched
+  note: >-
+    Repeat publishes a price ($499/month at 5,000 monthly orders, custom above
+    20,000) but there is no free tier, no trial, and no self-serve path to the
+    product itself — the published call to action is "Book a Demo", and the
+    Shopify listing bills externally through Repeat. There is no developer
+    surface to try, so try_now is false by construction.
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-08-13'
 image: https://assets.super.so/18f07db5-d58c-4144-a891-0df945119dae/uploads/cover/d2af8d52-6fe3-4645-bfb2-364ede5549e8.png
 tags:
 - Company
@@ -59,16 +72,38 @@ common:
   url: https://docs.getrepeat.io/en
 - type: HelpCenter
   url: https://docs.getrepeat.io/en
+- type: Support
+  url: https://docs.getrepeat.io/en/
 - type: Pricing
-  url: https://website.stamped.io/pricing/
+  url: https://getrepeat.io/product/pricing
+- type: Plans
+  url: plans/repeat-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/repeat-rate-limits.yml
+- type: LLMsTxt
+  url: llms/repeat-llms.txt
+- type: Integrations
+  url: asyncapi/repeat-integration-events.yml
+- type: Integrations
+  url: https://getrepeat.io/integrations
+- type: DataModel
+  url: data-model/repeat-data-model.yml
+- type: Components
+  url: components/repeat-components.yml
+- type: UseCases
+  url: https://connect.stamped.io/plays-library
+- type: Demo
+  url: https://stamped.io/request-demo
+- type: Newsletter
+  url: https://repeat.substack.com/
 - type: Blog
   url: https://website.stamped.io/blog/
 - type: TermsOfService
-  url: https://website.stamped.io/terms-of-use/
+  url: https://getrepeat.io/legal/terms-of-service
 - type: PrivacyPolicy
-  url: https://website.stamped.io/privacy-policy/
+  url: https://getrepeat.io/legal/privacy-policy
 x-enrichment:
-  date: '2026-07-20'
-  status: minimal
-  artifacts_added: 1
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 7
   pass: local-v1
