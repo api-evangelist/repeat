@@ -1,0 +1,72 @@
+# Repeat Help Center
+
+> Support and answers to supercharge your lifecycle marketing
+
+## Repeat Basics
+
+- [Understanding Moments, Plays, and Tools](https://docs.getrepeat.io/en/articles/9460287-understanding-moments-plays-and-tools.md)
+- [Getting Started with the Repeat Shopify App](https://docs.getrepeat.io/en/articles/9462230-getting-started-with-the-repeat-shopify-app.md)
+- [Overview of Your Replenishment Insights Tab](https://docs.getrepeat.io/en/articles/8852155-overview-of-your-replenishment-insights-tab.md)
+- [Repeat SMS](https://docs.getrepeat.io/en/articles/8797086-repeat-sms.md)
+
+## Moments
+
+- [Due to Replenish Events](https://docs.getrepeat.io/en/articles/8288408-due-to-replenish-events.md)
+- [Late Due to Replenish Events](https://docs.getrepeat.io/en/articles/8288625-late-due-to-replenish-events.md)
+- [Primed for Cross-sell Events](https://docs.getrepeat.io/en/articles/8288657-primed-for-cross-sell-events.md)
+- [How do Repeat Product Predictions Work?](https://docs.getrepeat.io/en/articles/9204809-how-do-repeat-product-predictions-work.md)
+- [Predicted Product Options](https://docs.getrepeat.io/en/articles/8466656-predicted-product-options.md)
+- [Primed for Subscription Events](https://docs.getrepeat.io/en/articles/9039090-primed-for-subscription-events.md)
+- [About to Lapse Events](https://docs.getrepeat.io/en/articles/8288719-about-to-lapse-events.md)
+
+## Repeat Carts
+
+- [Personalized Cart Basics](https://docs.getrepeat.io/en/articles/8279128-personalized-cart-basics.md): Discover the key features of Personalized Carts and learn when and how to use them.
+- [How To Customize the Repeat Cart](https://docs.getrepeat.io/en/articles/10127629-how-to-customize-the-repeat-cart.md)
+- [Featured Product Cart Basics](https://docs.getrepeat.io/en/articles/8280568-featured-product-cart-basics.md): Learn the basics of Featured Product Carts, including when & where to use them and how to create one.
+- [Offering Subscriptions On Repeat Carts](https://docs.getrepeat.io/en/articles/8279361-offering-subscriptions-on-repeat-carts.md): Learn how subscriptions work with Repeat and how to enable the feature for your store.
+- [Auto-Apply Unique Discount Codes on the Repeat Cart](https://docs.getrepeat.io/en/articles/10128375-auto-apply-unique-discount-codes-on-the-repeat-cart.md)
+- [What is the difference between Repeat Cart URL & Subscription Repeat Cart URL?](https://docs.getrepeat.io/en/articles/9093861-what-is-the-difference-between-repeat-cart-url-subscription-repeat-cart-url.md)
+- [Adding QR Codes to Your Products](https://docs.getrepeat.io/en/articles/9445118-adding-qr-codes-to-your-products.md)
+
+## Managing Products And Orders
+
+- [Shopify Sales Channel Availability](https://docs.getrepeat.io/en/articles/8279770-shopify-sales-channel-availability.md): Learn how to manage which products are shown on Repeat using Shopify's sales channel settings.
+- [Mapping Replacement Products](https://docs.getrepeat.io/en/articles/8565827-mapping-replacement-products.md)
+- [Working With Discount Codes](https://docs.getrepeat.io/en/articles/8892706-working-with-discount-codes.md)
+
+## Integrations
+
+- [Klaviyo Integration Overview](https://docs.getrepeat.io/en/articles/9395937-klaviyo-integration-overview.md): All of the events and profile enrichments provided by our Klaviyo integration.
+- [Klaviyo Profile Enrichment](https://docs.getrepeat.io/en/articles/8287666-klaviyo-profile-enrichment.md)
+- [Collections Metadata](https://docs.getrepeat.io/en/articles/10415437-collections-metadata.md): Learn more about how to find and use collections metadata in Klaviyo.
+- [Setting Up Attentive Integration](https://docs.getrepeat.io/en/articles/9445073-setting-up-attentive-integration.md)
+
+## Play Setup
+
+- [Testing Cross-Sell Predictions Block](https://docs.getrepeat.io/en/articles/9204774-testing-cross-sell-predictions-block.md)
+- [Setting Up Per Product / Per Category Branching](https://docs.getrepeat.io/en/articles/9421203-setting-up-per-product-per-category-branching.md)
+- [Setting Up Reorder CTA Headers/Footers](https://docs.getrepeat.io/en/articles/9325997-setting-up-reorder-cta-headers-footers.md)
+- [Turn Product Samples into Repeat Purchases with Automated Follow-ups](https://docs.getrepeat.io/en/articles/10614258-turn-product-samples-into-repeat-purchases-with-automated-follow-ups.md)
+- [Dynamic Blocks](https://docs.getrepeat.io/en/articles/14130682-dynamic-blocks.md)
+- [Add Subscription Product Suggestions to Any Email](https://docs.getrepeat.io/en/articles/9630816-add-subscription-product-suggestions-to-any-email.md): Easily integrate subscription product suggestions into email campaigns or flows to convert customers who are primed to subscribe
+- [Automatically Reach Subscription Ready Customers](https://docs.getrepeat.io/en/articles/9630869-automatically-reach-subscription-ready-customers.md): Identify and connect with customers on the verge of placing a subscription order via email or SMS
+- [Maximize Subscriptions with Post-Purchase Messages](https://docs.getrepeat.io/en/articles/9630915-maximize-subscriptions-with-post-purchase-messages.md): Transform one-time buyers into subscribers with post-purchase emails and Personalized Carts
+- [Grow Subscribers With Simple Content Blocks](https://docs.getrepeat.io/en/articles/9630968-grow-subscribers-with-simple-content-blocks.md): Utilize Personalized Carts to enhance conversion at every customer touchpoint, from post-purchase to winback flows.
+- [Bring Back Lapsing Customers With Postcards](https://docs.getrepeat.io/en/articles/9631011-bring-back-lapsing-customers-with-postcards.md): Focus on customers who are at risk of lapsing and automatically send postcards with a strong offer to encourage them to return
+- [Lapse Prevention Banner](https://docs.getrepeat.io/en/articles/9631041-lapse-prevention-banner.md): A dynamic banner for any flow or campaign email to offer at-risk customers your best discount
+- [Lapse Prevention Flow](https://docs.getrepeat.io/en/articles/9631084-lapse-prevention-flow.md): Trigger an email or SMS flow for customers in the moment before they are predicted to never to return again.
+- [Suggest Predicted Products Anywhere](https://docs.getrepeat.io/en/articles/9631233-suggest-predicted-products-anywhere.md): Use Repeat’s Product Predictions to suggest a customer’s next favorite product in any email campaign or flow
+- [Cross-sell Your Best Sellers](https://docs.getrepeat.io/en/articles/9631259-cross-sell-your-best-sellers.md): Use an automated email or SMS featuring your best sellers to drive a customer to their next favorite
+- [Cross-sell Predicted Products](https://docs.getrepeat.io/en/articles/9631271-cross-sell-predicted-products.md): Nudge customers towards their next purchase when they’re primed for a cross-sell
+- [Use Collections Metadata to Power Cross-Sell Product Prediction Branching](https://docs.getrepeat.io/en/articles/10415462-use-collections-metadata-to-power-cross-sell-product-prediction-branching.md): Reuse any collection-specific campaign emails in a Cross-sell flow to deliver a personalized experience your customers.
+- [Replenishment Reminder](https://docs.getrepeat.io/en/articles/9653384-replenishment-reminder.md): Reach each customer in the moment they are likely running low on a previously purchased product.
+- [Late Replenishment Reminder](https://docs.getrepeat.io/en/articles/9653423-late-replenishment-reminder.md): Reach light users of your product in the moment they are running low and other customers when are completely out.
+- [Send Replenishment Reminder Postcards](https://docs.getrepeat.io/en/articles/10614267-send-replenishment-reminder-postcards.md)
+- [Replenishment Reminder Banner](https://docs.getrepeat.io/en/articles/10614283-replenishment-reminder-banner.md)
+- [Show Dynamic Products for Replenishment](https://docs.getrepeat.io/en/articles/10614329-show-dynamic-products-for-replenishment.md)
+
+## Other
+
+- [How to Optimize Repeat Set Up for Promo Periods like Black-Friday-Cyber-Monday](https://docs.getrepeat.io/en/articles/10127475-how-to-optimize-repeat-set-up-for-promo-periods-like-black-friday-cyber-monday.md)
+- [Size Upsell](https://docs.getrepeat.io/en/articles/14434752-size-upsell.md): Recommend the larger version of previously purchased products to upsell customers and increase AOV during the replenishment moment.

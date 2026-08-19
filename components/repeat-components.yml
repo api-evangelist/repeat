@@ -1,0 +1,125 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.getrepeat.io/en/articles/8279128-personalized-cart-basics
+docs:
+- https://docs.getrepeat.io/en/articles/8279128-personalized-cart-basics
+- https://docs.getrepeat.io/en/articles/8280568-featured-product-cart-basics
+- https://docs.getrepeat.io/en/articles/10127629-how-to-customize-the-repeat-cart
+- https://docs.getrepeat.io/en/articles/14130682-dynamic-blocks
+- https://docs.getrepeat.io/en/articles/10614283-replenishment-reminder-banner
+- https://docs.getrepeat.io/en/articles/9445118-adding-qr-codes-to-your-products
+note: >-
+  Repeat ships no client-side component LIBRARY — there is no npm package, no web
+  component, no JS loader and no embed script anywhere in its documentation. What
+  it ships instead are two prebuilt surfaces a brand composes by URL and by
+  copy-paste: a hosted, per-customer checkout page on a Repeat-operated domain, and
+  a set of email content blocks written in the marketing platform's own template
+  language against Repeat's profile properties. Both are recorded here because both
+  are integration surfaces a developer actually wires up, but neither is a package
+  a developer installs. The hosted cart URL is the only parameterized, callable
+  surface Repeat publishes.
+families:
+- name: Personalized Cart (Repeat Cart)
+  kind: hosted-page
+  description: >-
+    A per-customer checkout page pre-populated from the customer's Shopify purchase
+    history: a "Due to Reorder" section auto-added to the cart, a "Previously
+    Purchased" section, and a merchant-configured "You Might Also Like" section.
+    Optionally offers Shopify subscription selling plans, with a variant of the URL
+    that defaults to "Subscribe & Save".
+  distribution: >-
+    A unique URL per customer, delivered through the marketing platform. It is
+    written onto every Klaviyo profile after the first purchase as the `Repeat Cart
+    URL` and `Subscription Repeat Cart URL` properties, and carried on every Moment
+    event.
+  host_pattern: 'https://{brand}.re-peat.shop/'
+  host_note: >-
+    Repeat's docs state the cart domain shown in the examples is illustrative and
+    that "not every store is on the same one" — the operative domain is the one
+    shown in the store's Repeat settings. re-peat.shop itself 301s to getrepeat.io.
+  configuration:
+    surface: Repeat Shopify app, Settings > Cart Style and Settings > You Might Also Like
+    options:
+    - You Might Also Like product selection (global across all carts)
+    - Promotional banner content and styling
+    - Button style and other design elements
+    - Repeat Cart Discount Code (must exactly match an active Shopify discount code)
+    - Minimum checkout quantity
+    - Live preview via "Preview Cart"
+- name: Featured Product Cart
+  kind: hosted-page
+  description: >-
+    A Repeat Cart with one specific product pre-added, for use in any channel where
+    a customer link is placed — email, SMS, or printed packaging.
+  distribution: >-
+    Links are generated in the Repeat Shopify app under the Products tab, either one
+    at a time from a product page or in bulk as a CSV via "Create Featured Product
+    Cart Links". Products must be published to the Repeat sales channel in Shopify
+    to be purchasable through the cart.
+  url_contract:
+    pattern: 'https://{brand}.re-peat.shop/replenish?v={variant_id}&rptc={channel_tag}'
+    parameters:
+    - name: v
+      description: Shopify variant ID of the featured product.
+      required: true
+    - name: rptc
+      description: >-
+        Channel attribution tag, required for Repeat analytics reporting. A separate
+        link must be generated per channel. Channel tags are defined in the app by
+        channel type (Email, SMS) plus platform name, producing values such as
+        `postscript-sms` or `repeat-qr`.
+      required: true
+      examples:
+      - postscript-sms
+      - repeat-qr
+    auth: none
+    documented_example: 'https://brand-name.re-peat.shop/replenish?v=1234&rptc=repeat-qr'
+- name: QR code reorder
+  kind: offline-entrypoint
+  description: >-
+    A Featured Product Cart link with `&rptc=repeat-qr` appended, encoded as a QR
+    code for product packaging or package inserts, so a scan lands the customer in a
+    pre-filled cart.
+  distribution: >-
+    Merchant-generated. Repeat documents the URL and the tracking parameter but does
+    not generate the QR image; the docs point at third-party generators. Performance
+    reporting on the tag is not self-serve — the docs direct merchants to email
+    cs@getrepeat.io for updated analytics.
+- name: Dynamic email blocks
+  kind: template-snippet
+  description: >-
+    Copy-paste content blocks for the marketing platform's email editor that render
+    Repeat's synced profile properties — a product-name banner, a lapse-prevention
+    banner, and dynamic product tables built from the `Repeat - Due To Replenish
+    Products` property.
+  distribution: >-
+    Provider-published snippets in Klaviyo's Django-style template language, saved by
+    the merchant as universal content blocks. Both a text-based and an image-based
+    variant are documented.
+  gating: >-
+    Blocks are paired with a documented show/hide condition —
+    `person|lookup:'Repeat - Due To Replenish'` — so the block only renders for
+    customers in an active replenishment window.
+  platform: Klaviyo
+package_distribution:
+  npm: none
+  cdn: none
+  web_components: none
+  embed_script: none
+  note: >-
+    Checked npm (registry search for getrepeat / repeat + shopify replenishment) and
+    the full 44-article Help Center index; no installable client package is published.
+evidence:
+- url: https://re-peat.shop/
+  status: 200
+  note: 301s to https://getrepeat.io/
+- url: https://olipop.re-peat.shop/replenish
+  status: 200
+  note: >-
+    A live brand cart host, confirming the documented {brand}.re-peat.shop pattern
+    resolves. Olipop is a Repeat case study published at
+    website.stamped.io/case-studies/olipop/.
+summary:
+  family_count: 4
+  installable_packages: 0
+  parameterized_url_surfaces: 1

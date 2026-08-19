@@ -1,0 +1,152 @@
+generated: '2026-08-13'
+method: probed
+source: live HTTP probes of getrepeat.io, docs.getrepeat.io, app.getrepeat.io, connect.stamped.io
+note: >-
+  No /.well-known/ document is served by a host Repeat controls. Three distinct
+  failure modes were observed and are recorded separately below, because they are
+  different facts. (1) getrepeat.io — the marketing site, served by Super.so on top
+  of Notion — returns a clean 404 on every path. (2) docs.getrepeat.io — a CNAME to
+  us.intercomhelpcenter.com — returns a real 200 security.txt, but the document is
+  INTERCOM'S, not Repeat's: it names Contact mailto:security@intercom.com, the
+  Bugcrowd program bugcrowd.com/intercom, and Canonical
+  https://app.intercom.com/.well-known/security.txt. It is the docs-platform vendor's
+  disclosure policy leaking through a customer subdomain, so it is recorded as a
+  third-party hit and NOT credited to Repeat. (3) app.getrepeat.io — a Netlify SPA
+  (repeat-northstar.netlify.app) — answers HTTP 200 with the same 4,488-byte HTML
+  application shell for EVERY path, including /openapi.json, /graphql and
+  /.well-known/agent-card.json. Those 200s are catch-all false positives, not
+  documents. No WellKnown or SecurityTxt pointer is emitted for this provider.
+hosts:
+- host: getrepeat.io
+  platform: Super.so / Notion
+  controlled_by_provider: true
+  paths:
+  - path: /.well-known/security.txt
+    status: 404
+    hit: false
+  - path: /.well-known/openid-configuration
+    status: 404
+    hit: false
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    hit: false
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    hit: false
+  - path: /.well-known/api-catalog
+    status: 404
+    hit: false
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    hit: false
+  - path: /.well-known/agent-card.json
+    status: 404
+    hit: false
+  - path: /.well-known/agent.json
+    status: 404
+    hit: false
+- host: docs.getrepeat.io
+  platform: Intercom Help Center (CNAME us.intercomhelpcenter.com)
+  controlled_by_provider: false
+  paths:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain
+    bytes: 713
+    hit: false
+    third_party: intercom
+    note: >-
+      Intercom's own security.txt, served on the customer subdomain. Canonical
+      https://app.intercom.com/.well-known/security.txt, Contact
+      security@intercom.com, Policy bugcrowd.com. Not Repeat's disclosure program;
+      no SecurityTxt pointer emitted.
+  - path: /.well-known/openid-configuration
+    status: 404
+    hit: false
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    hit: false
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    hit: false
+  - path: /.well-known/api-catalog
+    status: 404
+    hit: false
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    hit: false
+  - path: /.well-known/agent-card.json
+    status: 404
+    hit: false
+  - path: /.well-known/agent.json
+    status: 404
+    hit: false
+- host: app.getrepeat.io
+  platform: Netlify SPA (repeat-northstar.netlify.app)
+  controlled_by_provider: true
+  spa_catch_all: true
+  note: >-
+    Every probed path returns HTTP 200 with an identical 4,488-byte HTML shell.
+    Treated as a miss on all paths per the SPA catch-all rule.
+  paths:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/html
+    bytes: 4488
+    hit: false
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: text/html
+    bytes: 4488
+    hit: false
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: text/html
+    bytes: 4488
+    hit: false
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: text/html
+    bytes: 4488
+    hit: false
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: text/html
+    bytes: 4488
+    hit: false
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    content_type: text/html
+    bytes: 4488
+    hit: false
+  - path: /.well-known/agent-card.json
+    status: 200
+    content_type: text/html
+    bytes: 4488
+    hit: false
+  - path: /.well-known/agent.json
+    status: 200
+    content_type: text/html
+    bytes: 4488
+    hit: false
+- host: connect.stamped.io
+  platform: Stamped (parent brand) plays/moments library
+  controlled_by_provider: false
+  paths:
+  - path: /.well-known/security.txt
+    status: 404
+    hit: false
+  - path: /.well-known/agent-card.json
+    status: 404
+    hit: false
+  - path: /.well-known/agent.json
+    status: 404
+    hit: false
+summary:
+  paths_probed: 28
+  documents_found: 1
+  documents_owned_by_provider: 0
+  agent_card: false
+  security_txt: false
+  openid_configuration: false
+  api_catalog: false

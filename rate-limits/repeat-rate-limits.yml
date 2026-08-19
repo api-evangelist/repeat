@@ -1,0 +1,30 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.getrepeat.io/llms.txt
+docs:
+- https://docs.getrepeat.io/llms.txt
+- https://getrepeat.io/product/pricing
+note: >-
+  Repeat publishes no rate limits, because it publishes no callable API. The full
+  Help Center index (44 articles, read from the served llms.txt) contains no rate
+  limit, quota, throttle, 429 or Retry-After reference, and there is no developer
+  portal or API reference on any Repeat host. The one volume constraint the
+  provider does publish is COMMERCIAL, not runtime: plans are sized by the
+  connected store's monthly order count (5,000 / 20,000), and exceeding it triggers
+  a sales conversation rather than a throttled response. That is captured in
+  plans/repeat-plans-pricing.yml, not here, because it is not a signal an agent can
+  read off a response.
+limits: []
+headers: []
+exhaustion_status: null
+retry_after: null
+commercial_volume_limits:
+- unit: monthly orders processed by the connected Shopify store
+  tiers:
+  - 5000
+  - 20000
+  enforcement: >-
+    Negotiated. The pricing FAQ commits only to talking to the customer before the
+    monthly price increases; no automatic cutoff or throttle is described.
+  source: https://getrepeat.io/product/pricing
+limit_count: 0

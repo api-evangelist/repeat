@@ -1,0 +1,71 @@
+generated: '2026-08-13'
+method: searched
+source: https://getrepeat.io/product/pricing
+docs:
+- https://getrepeat.io/product/pricing
+- https://apps.shopify.com/repeat
+- https://website.stamped.io/pricing/
+note: >-
+  Repeat's own pricing page publishes two order-volume tiers, only one of which
+  carries a number. Pricing is metered on the connected store's MONTHLY ORDER
+  VOLUME — not on API calls, seats, or events — because Repeat has no public API to
+  meter. The Shopify App Store listing for the same app states "Free to install,
+  additional charges may apply" with plans "from $199/month" billed externally by
+  Repeat, which does not match the $499 figure on Repeat's own page; both are
+  recorded rather than reconciled, since the provider publishes both. Repeat is now
+  a Stamped product and the site's Pricing link in the global nav points at
+  website.stamped.io/pricing/, which returned 403 to an unauthenticated fetch.
+currency: USD
+billing_period: monthly
+metering_unit: monthly orders processed by the connected Shopify store
+plans:
+- name: 5,000 orders
+  price: 499
+  currency: USD
+  period: month
+  quota:
+    monthly_orders: 5000
+  overage: >-
+    Not published as a rate. The pricing FAQ states only that "if your number of
+    monthly orders increases, we'll always talk to you before your monthly price
+    increases" — a negotiated step-up, not a published overage price.
+  public_price: true
+- name: 20,000 orders
+  price: null
+  currency: USD
+  period: month
+  quota:
+    monthly_orders: 20000
+  price_note: 'Listed as "Custom plan" — contact sales.'
+  public_price: false
+included_in_all_plans:
+- All Repeat Moments (Due to Replenish, Late Due to Replenish, Primed for Cross-sell,
+  Primed for Subscription, About to Lapse)
+- All integrations (Klaviyo, Attentive, Postscript, PostPilot)
+- Trigger email and SMS flows with Repeat events
+- Personalized Carts
+- Retention insights
+free_tier:
+  available: false
+  note: >-
+    The Shopify listing is "free to install" but the app itself is billed
+    externally by Repeat; there is no published free usage tier.
+trial:
+  available: false
+  note: No trial is advertised on the pricing page. The published call to action is "Book a Demo".
+signup:
+  self_serve: false
+  path: Install from the Shopify App Store, then book a demo / talk to sales for a plan.
+  demo_url: https://stamped.io/request-demo
+conflicting_sources:
+- source: https://apps.shopify.com/repeat
+  claim: 'Free to install. Additional charges may apply. Plans from $199/month, billed in USD, charged externally by Repeat.'
+  status: 200
+- source: https://getrepeat.io/product/pricing
+  claim: '$499/month at 5,000 orders; custom above.'
+  status: 200
+- source: https://website.stamped.io/pricing/
+  claim: Parent-brand pricing linked from the Repeat site nav.
+  status: 403
+  note: Returned 403 to an unauthenticated fetch; not read.
+plan_count: 2

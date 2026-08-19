@@ -1,0 +1,213 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.getrepeat.io/en/articles/9395937-klaviyo-integration-overview
+docs:
+- https://docs.getrepeat.io/en/articles/9395937-klaviyo-integration-overview
+- https://docs.getrepeat.io/en/articles/8288408-due-to-replenish-events
+- https://docs.getrepeat.io/en/articles/8288625-late-due-to-replenish-events
+- https://docs.getrepeat.io/en/articles/8288657-primed-for-cross-sell-events
+- https://docs.getrepeat.io/en/articles/9039090-primed-for-subscription-events
+- https://docs.getrepeat.io/en/articles/8288719-about-to-lapse-events
+- https://docs.getrepeat.io/en/articles/8287666-klaviyo-profile-enrichment
+- https://getrepeat.io/integrations
+name: Repeat Integration Event Catalog
+transport: partner-platform
+note: >-
+  This is an event catalog, NOT an AsyncAPI document and NOT a webhook surface.
+  Repeat publishes no AsyncAPI, no CloudEvents schema, and no consumer-registered
+  webhook endpoint. What it DOES publish — in detail, with named events and typed
+  properties — is the set of lifecycle "Moment" events it pushes into a brand's
+  own marketing platforms (Klaviyo, Attentive, Postscript, PostPilot) on the
+  brand's behalf. A consumer subscribes to these by connecting the platform inside
+  the Repeat Shopify app, not by standing up an HTTP endpoint, so no `Webhooks`
+  pointer is emitted for them. The property tables below are transcribed from
+  Repeat's own Help Center; nothing here is inferred. Every property is documented
+  against the Klaviyo delivery; Repeat's docs state the same events are sent to the
+  other connected platforms but only publish the field-level tables for Klaviyo.
+delivery:
+- platform: Klaviyo
+  mechanism: >-
+    Repeat writes events and customer profile properties into the brand's Klaviyo
+    account. Consumed as flow triggers, segment conditions, and template variables.
+  documented_fields: true
+  docs: https://docs.getrepeat.io/en/articles/9395937-klaviyo-integration-overview
+- platform: Attentive
+  mechanism: >-
+    OAuth connection initiated from the Integrations tab of the Repeat Shopify app;
+    events trigger Attentive journeys.
+  documented_fields: false
+  docs: https://docs.getrepeat.io/en/articles/9445073-setting-up-attentive-integration
+- platform: Postscript
+  mechanism: Events trigger and personalize Postscript SMS flows.
+  documented_fields: false
+  docs: https://getrepeat.io/integrations
+- platform: PostPilot
+  mechanism: Events trigger direct-mail (postcard) sends at a lifecycle Moment.
+  documented_fields: false
+  docs: https://getrepeat.io/integrations
+events:
+- name: Due to Replenish
+  moment: replenishment
+  description: >-
+    Emitted when Repeat predicts a customer is running low on a previously
+    purchased replenishable product, based on ingested Shopify order history and
+    the typical replenishment interval for that product.
+  docs: https://docs.getrepeat.io/en/articles/8288408-due-to-replenish-events
+  properties:
+  - name: Repeat Cart URL
+    type: string
+    description: URL of the customer's Personalized Cart.
+  - name: Subscription Repeat Cart URL
+    type: string
+    description: URL of the Personalized Cart with subscription selected by default.
+  - name: reorderableProducts
+    type: array<object>
+    description: Products the customer is currently due to replenish.
+    items_ref: ReorderableProduct
+  - name: reorderable_product_ids
+    type: array<number>
+    description: Shopify product IDs of the reorderable products.
+  - name: reorderable_product_titles
+    type: array<string>
+    description: Titles of the reorderable products.
+- name: Late Due to Replenish
+  moment: replenishment
+  description: >-
+    Emitted when a customer has gone longer than the typical replenishment
+    interval for a product without reordering — a product-specific winback signal.
+  docs: https://docs.getrepeat.io/en/articles/8288625-late-due-to-replenish-events
+  properties:
+  - name: Repeat Cart URL
+    type: string
+  - name: Subscription Repeat Cart URL
+    type: string
+  - name: reorderableProducts
+    type: array<object>
+    items_ref: ReorderableProduct
+  - name: reorderable_product_ids
+    type: array<number>
+  - name: reorderable_product_titles
+    type: array<string>
+- name: Primed for Cross-sell
+  moment: cross-sell
+  description: >-
+    Emitted when Repeat's Product Predictions identify products a customer has not
+    yet tried and is most likely to buy next. Requires Product Predictions to be
+    activated under Moments > Cross Sell in the Repeat Shopify app.
+  docs: https://docs.getrepeat.io/en/articles/8288657-primed-for-cross-sell-events
+  properties:
+  - name: Repeat Cart URL
+    type: string
+  - name: Subscription Repeat Cart URL
+    type: string
+  - name: productPredictions
+    type: array<object>
+    description: Products the customer is likely to buy next.
+    items_ref: ReorderableProduct
+  - name: previouslyPurchased
+    type: array<object>
+    description: Products the customer has purchased before; same shape as productPredictions.
+    items_ref: ReorderableProduct
+  - name: product_predictions_product_ids
+    type: array<number>
+  - name: product_predictions_product_titles
+    type: array<string>
+  - name: product_predictions_variant_ids
+    type: array<number>
+- name: Primed for Subscription
+  moment: subscription-upsell
+  description: >-
+    Emitted when a customer's purchase frequency and cadence signal readiness to
+    convert to a subscription for a specific product.
+  docs: https://docs.getrepeat.io/en/articles/9039090-primed-for-subscription-events
+  properties:
+  - name: Repeat Cart URL
+    type: string
+  - name: Subscription Repeat Cart URL
+    type: string
+  - name: upsellProduct
+    type: object
+    description: >-
+      The single product for which the customer is a subscription candidate.
+      Unlike the other Moments this carries one product, not a list.
+    items_ref: ReorderableProduct
+  - name: upsell_product_ids
+    type: array<number>
+  - name: upsell_product_titles
+    type: array<string>
+- name: About to Lapse
+  moment: about-to-lapse
+  description: >-
+    Emitted when Repeat's churn-risk assessment puts a customer near — but not yet
+    past — the point of permanent lapse.
+  docs: https://docs.getrepeat.io/en/articles/8288719-about-to-lapse-events
+  properties:
+  - name: Repeat Cart URL
+    type: string
+  - name: Subscription Repeat Cart URL
+    type: string
+  - name: previouslyPurchased
+    type: array<object>
+    description: Products the customer has bought before.
+    items_ref: ReorderableProduct
+shared_shapes:
+- name: ReorderableProduct
+  description: >-
+    The common product envelope carried by every Moment event. Nested under a
+    `product` key, with Shopify identifiers passed through unchanged.
+  fields:
+  - name: product.id
+    type: number
+    description: Shopify product ID.
+  - name: product.title
+    type: string
+  - name: product.price
+    type: string
+    description: Price as a decimal string, e.g. "24.00".
+  - name: product.subscription_price
+    type: string
+    description: >-
+      Price when purchased on a subscription plan. Present only when the product
+      has a subscription selling plan in Shopify.
+  - name: product.handle
+    type: string
+    description: Shopify product handle used in the storefront URL.
+  - name: product.images
+    type: array<object>
+    description: Product images; `images.0.src` is the primary image URL.
+  - name: product.variant.id
+    type: number
+    description: Shopify variant ID.
+  - name: product.variant.title
+    type: string
+profile_properties:
+  docs: https://docs.getrepeat.io/en/articles/8287666-klaviyo-profile-enrichment
+  description: >-
+    Customer profile properties Repeat writes onto every Klaviyo profile, used for
+    segmentation and show/hide personalization rather than as flow triggers.
+  properties:
+  - name: Repeat - Due To Replenish
+    type: boolean
+    description: True while the customer is inside an active replenishment window.
+  - name: Repeat - Due To Replenish Products
+    type: string
+    description: >-
+      A JSON array rendered as text, one object per product, with product_id,
+      variant_id, product_title, variant_title, price_cents, subscription_price
+      (when a subscription plan exists), image_url and pdp_url.
+  - name: Repeat Cart URL
+    type: string
+    description: >-
+      Unique Personalized Cart link. Added to every customer profile after their
+      first purchase.
+  - name: Subscription Repeat Cart URL
+    type: string
+    description: >-
+      Personalized Cart link that defaults to "Subscribe & Save" for products with
+      a Shopify subscription selling plan.
+summary:
+  event_count: 5
+  platform_count: 4
+  asyncapi_document: false
+  consumer_registered_webhooks: false
+  field_tables_published_for: Klaviyo

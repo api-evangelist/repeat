@@ -1,0 +1,147 @@
+generated: '2026-08-13'
+method: derived
+source: asyncapi/repeat-integration-events.yml
+docs:
+- https://docs.getrepeat.io/en/articles/8287666-klaviyo-profile-enrichment
+- https://docs.getrepeat.io/en/articles/8288408-due-to-replenish-events
+- https://docs.getrepeat.io/en/articles/10415437-collections-metadata
+note: >-
+  Derived from the property tables Repeat publishes for its Klaviyo integration
+  event payloads and profile enrichments — there is no OpenAPI, no JSON Schema and
+  no GraphQL SDL to derive from. The model is therefore the shape of what Repeat
+  EMITS, not of a request/response surface it exposes. Every identifier in the
+  model is a Shopify identifier passed through unchanged: Repeat mints no public
+  IDs of its own, and the one opaque identifier it does publish — the Personalized
+  Cart URL — is a per-customer URL rather than a resource ID.
+entities:
+- name: Customer
+  description: >-
+    A shopper on the connected Shopify store. Never addressed by a Repeat ID —
+    identified on the marketing-platform side by the Klaviyo/Attentive profile
+    that Repeat enriches.
+  identifier: none published (matched on the marketing-platform profile)
+  fields:
+  - name: Repeat - Due To Replenish
+    type: boolean
+  - name: Repeat - Due To Replenish Products
+    type: string
+    note: JSON array serialized as text.
+  - name: Repeat Cart URL
+    type: string
+  - name: Subscription Repeat Cart URL
+    type: string
+  relationships:
+  - type: has_many
+    target: Product
+    via: reorderableProducts / previouslyPurchased / productPredictions
+  - type: has_one
+    target: PersonalizedCart
+    via: Repeat Cart URL
+  - type: has_many
+    target: MomentEvent
+    via: event emission
+- name: Product
+  description: A Shopify product, passed through with Repeat's pricing annotations.
+  identifier: product.id (Shopify product ID, number)
+  fields:
+  - name: id
+    type: number
+  - name: title
+    type: string
+  - name: price
+    type: string
+  - name: subscription_price
+    type: string
+    note: Present only when a Shopify subscription selling plan exists.
+  - name: handle
+    type: string
+  - name: images
+    type: array<object>
+  relationships:
+  - type: has_many
+    target: Variant
+    via: product.variant
+  - type: belongs_to
+    target: Collection
+    via: Shopify collection membership
+- name: Variant
+  description: A Shopify product variant, the unit Repeat predicts and reorders against.
+  identifier: variant.id (Shopify variant ID, number)
+  fields:
+  - name: id
+    type: number
+  - name: title
+    type: string
+    note: '"Default Title" when the product has a single variant.'
+  relationships:
+  - type: belongs_to
+    target: Product
+    via: product.id
+- name: Collection
+  description: >-
+    A Shopify collection Repeat passes through to Klaviyo as metadata so brands can
+    branch flows by collection.
+  identifier: Shopify collection handle
+  relationships:
+  - type: has_many
+    target: Product
+    via: Shopify collection membership
+- name: PersonalizedCart
+  description: >-
+    A hosted, per-customer cart pre-filled with the customer's previously purchased
+    products, optionally defaulting to a subscription selling plan.
+  identifier: Repeat Cart URL (opaque per-customer URL)
+  fields:
+  - name: url
+    type: string
+  - name: subscription_url
+    type: string
+  relationships:
+  - type: belongs_to
+    target: Customer
+    via: Repeat Cart URL
+  - type: has_many
+    target: Product
+    via: reorderable products
+- name: MomentEvent
+  description: >-
+    A lifecycle prediction Repeat emits to the brand's marketing platform. Five
+    named Moments — Due to Replenish, Late Due to Replenish, Primed for Cross-sell,
+    Primed for Subscription, About to Lapse.
+  identifier: event name
+  relationships:
+  - type: belongs_to
+    target: Customer
+    via: marketing-platform profile
+  - type: has_many
+    target: Product
+    via: reorderableProducts / productPredictions / previouslyPurchased / upsellProduct
+  - type: has_one
+    target: PersonalizedCart
+    via: Repeat Cart URL
+- name: Order
+  description: >-
+    A Shopify order. Repeat ingests store order history as its input signal;
+    orders are not re-exposed as an entity in any published payload.
+  identifier: Shopify order ID (not published in Repeat payloads)
+  relationships:
+  - type: belongs_to
+    target: Customer
+    via: Shopify customer
+  - type: has_many
+    target: Variant
+    via: line items
+id_conventions:
+- domain: products and variants
+  scheme: Shopify numeric IDs, passed through unchanged
+  example_shape: '12345 (product), 56789 (variant)'
+- domain: money
+  scheme: >-
+    Two representations coexist. Event payloads carry `price` as a decimal string
+    ("24.00"); the profile-enrichment property carries `price_cents` as an integer
+    (7800). A consumer reading both surfaces must handle both.
+summary:
+  entity_count: 7
+  relationship_count: 12
+  derived_from: documented event and profile-property payloads
+  openapi_present: false
