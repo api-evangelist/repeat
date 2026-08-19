@@ -44,7 +44,7 @@ accessModel:
     product itself — the published call to action is "Book a Demo", and the
     Shopify listing bills externally through Repeat. There is no developer
     surface to try, so try_now is false by construction.
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-08-13'
 image: https://assets.super.so/18f07db5-d58c-4144-a891-0df945119dae/uploads/cover/d2af8d52-6fe3-4645-bfb2-364ede5549e8.png
